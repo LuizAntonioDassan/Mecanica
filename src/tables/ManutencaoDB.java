@@ -13,7 +13,6 @@ public class ManutencaoDB {
     Statement stm = null;
     PreparedStatement pstm = null;
 
-
     public void tabelaManutencao(){
         try{
             DataBase data = new DataBase();
