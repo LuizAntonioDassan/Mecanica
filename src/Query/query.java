@@ -335,7 +335,7 @@ public class query {
                 stm = conn.createStatement();
                 rows = stm.executeQuery(table);
                 if (rows.isBeforeFirst() == false) {
-                    System.err.println("Nenhum Cliente encontrado com esse CPF");
+                    System.err.println("Nenhum Veiculo encontrado com essa Placa");
                 }else{            
                     while(rows.next()){
                         System.out.println(rows.getString("idveiculo")+ 
