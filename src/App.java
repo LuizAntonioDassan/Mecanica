@@ -14,6 +14,7 @@ import scripts.InsereVeiculo;
 import tables.ClienteDB;
 import tables.ManutencaoDB;
 import tables.VeiculoDB;
+import View.Screen;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -28,8 +29,8 @@ public class App {
         // new ManutencaoDB().criaManutencao(descricao, custo, tipo);
 
         
-        // DataBase data = new DataBase();
-        // data.conectDb("mecanica", "postgres", "java");
+        DataBase data = new DataBase();
+        data.conectDb("mecanica", "postgres", "java");
         
         // new CriaTabelas();
         // new InsereCliente();
@@ -37,6 +38,8 @@ public class App {
         // new InsereFuncionario();
         // new InsereVeiculo();
         // new InsereManutencao();
+
+        new Screen();
         // new query().pesquisa("veiculo", "BAC");
         // new query().pesquisa("cliente", "Lu");
         // new query().recuperaVeiculoCliente("ABC1234");               

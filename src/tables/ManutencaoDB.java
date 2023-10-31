@@ -44,14 +44,14 @@ public class ManutencaoDB {
         }
     }
 
-    public void criaManutencao(String descricao, Double custo, String tipo){
+    public void criaManutencao(String descricao, Double custo, String tipo, String placa){
         Boolean finalizado = false;
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         try{
             DataBase data = new DataBase();
             conn = data.conectDb("mecanica", "postgres", "java");
 
-            String insertVeiculo = "INSERT INTO manutencao (descricao, custo, hora, tipo, finalizado) VALUES (?,?,?,?,?)";
+            String insertVeiculo = "INSERT INTO manutencao (descricao, custo, hora, tipo, finalizado, placa) VALUES (?,?,?,?,?,?)";
             pstm = conn.prepareStatement(insertVeiculo);
 
             pstm.setString(1, descricao);
@@ -59,6 +59,7 @@ public class ManutencaoDB {
             pstm.setTimestamp(3, timestamp);
             pstm.setString(4, tipo);
             pstm.setBoolean(5, finalizado);
+            pstm.setString(6, placa);
 
             int rows = pstm.executeUpdate();
 
