@@ -174,7 +174,58 @@ public class ManutencaoPanel extends JPanel {
   private void CadastrarManutencao() {
     String custo = tCusto.getText();
     custo = custo.replace(',', '.');
+    if(tCPF.getText().length() == 0){
+      System.out.println("Ta vazio");
+    }
 
-    new ManutencaoDB().criaManutencao(tProblema.getText(), Double.parseDouble(custo), cbTipoManutencao.getSelectedItem().toString(), tPlaca.getText());
+    if((tProblema.getText().length() > 0) && (tPlaca.getText().length() > 0) && (tCusto.getText().length() > 0) && (tCPF.getText().length() > 0) && (tModelo.getText().length() > 0) && (tCor.getText().length() > 0) && (tTelefone.getText().length() > 0) && (tEmail.getText().length() > 0)){
+      new ManutencaoDB().criaManutencao(tProblema.getText(), Double.parseDouble(custo), cbTipoManutencao.getSelectedItem().toString(), tPlaca.getText());
+      tCPF.setText("");
+      tPlaca.setText("");
+      tProblema.setText("");
+      tCusto.setText("");
+      tCor.setText("");
+      tEmail.setText("");
+      tNome.setText("");
+      tTelefone.setText("");
+      JOptionPane optionPane = new JOptionPane();
+      optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+      optionPane.setMessage("Manutencao Cadastrada");       
+      JDialog dialog = optionPane.createDialog(null, "Cadastro Realizado");
+      dialog.setVisible(true);
+    }
+    else{
+      JOptionPane optionPane = new JOptionPane();
+      if(tCPF.getText().length() == 0){
+        optionPane.setMessage("Campo CPF nao foi preenchido");       
+      }
+      else if(tModelo.getText().length() == 0){
+        optionPane.setMessage("Campo Modelo nao foi preenchido");       
+      }
+      else if(tNome.getText().length() == 0){
+        optionPane.setMessage("Campo Nome nao foi preenchido");       
+      }
+      else if(tCor.getText().length() == 0){
+        optionPane.setMessage("Campo Cor nao foi preenchido");       
+      }
+      else if(tTelefone.getText().length() == 0){
+        optionPane.setMessage("Campo Telefone nao foi preenchido");       
+      }
+      else if(tEmail.getText().length() == 0){
+        optionPane.setMessage("Campo Email nao foi preenchido");       
+      }
+      else if(tPlaca.getText().length() == 0){
+        optionPane.setMessage("Campo Placa nao foi preenchido");       
+      }
+      else if(tCusto.getText().length() == 0){
+        optionPane.setMessage("Campo Custo nao foi preenchido");       
+      }
+      else if(tProblema.getText().length() == 0){
+        optionPane.setMessage("Campo Problema nao foi preenchido");       
+      }
+      optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+      JDialog dialog = optionPane.createDialog(null, "Erro Preenchimento");
+      dialog.setVisible(true);
+    }
   }
 }
