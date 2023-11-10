@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 import javax.management.Query;
 
+import Controller.query;
 import Db.DataBase;
 import Model.Manutencao;
-import Query.query;
 import scripts.CriaTabelas;
 import scripts.InsereAdministrador;
 import scripts.InsereCliente;
@@ -40,8 +40,8 @@ public class App {
         // new InsereManutencao();
 
         new Screen();
-        // new query().pesquisa("veiculo", "BAC");
-        // new query().pesquisa("cliente", "Lu");
+        // new query().pesquisa("veiculo", "O");
+        // new query().pesquisa("cliente", "Ca");
         // new query().recuperaVeiculoCliente("ABC1234");               
 
         //new ClienteDB().removeCliente("11111111111");
