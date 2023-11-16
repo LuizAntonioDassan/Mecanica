@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import Controller.ManutecanoController;
 import Model.Manutencao;
 import tables.ManutencaoDB;
 
@@ -179,7 +180,7 @@ public class ManutencaoPanel extends JPanel {
     }
 
     if((tProblema.getText().length() > 0) && (tPlaca.getText().length() > 0) && (tCusto.getText().length() > 0) && (tCPF.getText().length() > 0) && (tModelo.getText().length() > 0) && (tCor.getText().length() > 0) && (tTelefone.getText().length() > 0) && (tEmail.getText().length() > 0)){
-      new ManutencaoDB().criaManutencao(tProblema.getText(), Double.parseDouble(custo), cbTipoManutencao.getSelectedItem().toString(), tPlaca.getText());
+      new ManutecanoController().agendarManutencao(tProblema.getText(), Double.parseDouble(custo), cbTipoManutencao.getSelectedItem().toString(), tPlaca.getText());
       tCPF.setText("");
       tPlaca.setText("");
       tProblema.setText("");
