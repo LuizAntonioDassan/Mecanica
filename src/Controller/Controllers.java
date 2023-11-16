@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 import Db.DataBase;
 
-public class query {
+public class Controllers {
     /*
      * Seleciona Veiculo por Cliente
      * select c.nome, c.cpf, v.modelo, v.placa from cliente c join veiculo v on c.cpf = v.cpf;
