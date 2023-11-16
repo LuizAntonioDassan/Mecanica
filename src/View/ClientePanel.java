@@ -7,7 +7,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -62,7 +64,28 @@ public class ClientePanel extends JPanel {
 
     bCadastrar.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        new ClienteDB().InsereCliente(nome.getText(), numero.getText(), cpf.getText(), endereco.getText(), email.getText());
+        if(!nome.getText().isEmpty() && !numero.getText().isEmpty() && !cpf.getText().isEmpty()&& !endereco.getText().isEmpty() && !email.getText().isEmpty()){
+  
+          new ClienteDB().InsereCliente(nome.getText(), numero.getText(), cpf.getText(), endereco.getText(), email.getText());
+          nome.setText("");
+          numero.setText("");
+          cpf.setText("");
+          email.setText("");
+          endereco.setText("");
+  
+          JOptionPane optionPane = new JOptionPane();
+          optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+          optionPane.setMessage("Cliente Cadastrada");       
+          JDialog dialog = optionPane.createDialog(null, "Cadastro Realizado");
+          dialog.setVisible(true);
+          
+        }else{
+          JOptionPane optionPane = new JOptionPane();
+          optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+          optionPane.setMessage("Faltam dados a serem preenchidos");       
+          JDialog dialog = optionPane.createDialog(null, "Erro");
+          dialog.setVisible(true);     
+        }
       }
     });
 
