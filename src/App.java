@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 import javax.management.Query;
 
-import Controller.query;
 import Db.DataBase;
 import Model.Manutencao;
 import scripts.CriaTabelas;

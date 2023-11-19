@@ -37,6 +37,13 @@ public class Veiculo {
     public void setCor(String cor) {
         this.cor = cor;
     }
+    public Veiculo(String placa, String marca, String modelo, String ano, String cor) {
+        this.placa = placa;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.ano = ano;
+        this.cor = cor;
+    }
     
     
 }

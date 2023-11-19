@@ -1,7 +1,6 @@
 package scripts;
 
 import Controller.ManutecanoController;
-import tables.ManutencaoDB;
 
 public class InsereManutencao {
     public InsereManutencao(){

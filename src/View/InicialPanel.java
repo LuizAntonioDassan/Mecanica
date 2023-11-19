@@ -3,7 +3,6 @@ package View;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
 
 public class InicialPanel extends JPanel {
   private JButton cliente;

@@ -1,5 +1,6 @@
 package Controller;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import Db.DataBase;
+import Model.Cliente;
+import Model.Veiculo;
 
 public class Controllers {
     /*
@@ -216,13 +219,13 @@ public class Controllers {
         }
     }
 
-     public void recuperaVeiculoCliente(String placa){
+     public Veiculo recuperaVeiculoCliente(String cpf){
         ResultSet rows;        
         try{
             DataBase data = new DataBase();
             conn = data.conectDb("mecanica", "postgres", "java");
             
-            String table = String.format("SELECT * FROM veiculo where placa = '%s'",placa);
+            String table = String.format("SELECT * FROM veiculo where cpf = '%s'",cpf);
             // String table = String.format("SELECT * FROM veiculo where placa LIKE '%%%s%%",placa); recupera todas as placas parecidas com esse nome
             stm = conn.createStatement();
             
@@ -238,7 +241,9 @@ public class Controllers {
                     + rows.getString("modelo")+ " | " 
                     + rows.getString("ano")+ " | " 
                     + rows.getString("cor"));
-            }
+                    Veiculo veiculo = new Veiculo(rows.getString("placa"),rows.getString("marca"),rows.getString("modelo"),rows.getString("ano"), rows.getString("cor"));
+                    return veiculo;
+                }
             }
         }catch(SQLException e){
             e.printStackTrace();
@@ -259,9 +264,10 @@ public class Controllers {
                 e.printStackTrace();
             }
         }
+        return null;
     }
 
-     public void recuperaCliente(String cpf){
+     public Cliente recuperaCliente(String cpf){
         ResultSet rows;        
         try{
             DataBase data = new DataBase();
@@ -274,6 +280,7 @@ public class Controllers {
             rows = stm.executeQuery(table);
             if (rows.isBeforeFirst() == false) {
                 System.err.println("Nenhum Cliente encontrado com esse CPF");
+                return null;
             }else{            
                 while(rows.next()){
                     System.out.println(rows.getString("idcliente")+ 
@@ -282,6 +289,8 @@ public class Controllers {
                     + rows.getString("cpf")+ " | " 
                     + rows.getString("endereco")+ " | " 
                     + rows.getString("email"));
+                    Cliente cliente = new Cliente(rows.getString("nome"), rows.getString("numero"), rows.getString("cpf"), rows.getString("endereco"), rows.getString("email"));
+                    return cliente;
                 }
             }
         }catch(SQLException e){
@@ -303,6 +312,7 @@ public class Controllers {
                 e.printStackTrace();
             }
         }
+        return null;
     }
 
     public void pesquisa(String tabela, String conteudo){
