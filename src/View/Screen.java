@@ -13,6 +13,7 @@ public class Screen {
         tela.setSize(800, 500);
         tela.setTitle("Mecanica UFMS");
         tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        tela.setLocationRelativeTo(null);
     }
 
 }
