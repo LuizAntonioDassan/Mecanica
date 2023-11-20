@@ -7,6 +7,7 @@ public class Veiculo {
     private String ano;
     private String cor;
 
+
     public String getPlaca() {
         return placa;
     }

@@ -22,10 +22,14 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
+import Model.Cliente;
+
 public class ComprovantePanel {
     JLabel texto;
+    Cliente cliente;
 
-    public ComprovantePanel() {
+
+    public ComprovantePanel(Integer idmanut, String valor, String placa) {
         JFrame comprovante = new JFrame();
         comprovante.setVisible(true);
         comprovante.setSize(250, 150);
@@ -62,7 +66,7 @@ public class ComprovantePanel {
 
         bCadastrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                geraRecibo();
+                geraRecibo(valor, placa);
                 comprovante.dispose();
                 JOptionPane optionPane = new JOptionPane();
                 optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
@@ -78,14 +82,24 @@ public class ComprovantePanel {
 
     }
 
-    public void geraRecibo(){
+    public void geraRecibo(String valor, String placa){
         PDDocument document = new PDDocument();
         PDPage firstPage = new PDPage();
         document.addPage(firstPage);
+        String textoCompleto = "Comprovante de pagamento no valor de: R$"+ 
+        valor + " na placa: " + placa ;
         
         try{
-            document.save("F:\\PDFBox\\mypdf.pdf");
+            PDPageContentStream contentStream = new PDPageContentStream(document, firstPage);
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+            contentStream.newLineAtOffset(100, 700);
+            contentStream.showText(textoCompleto);
+            contentStream.endText();
+            contentStream.close();
+            document.save("C:\\recibos\\mypdf.pdf");
             document.close();
+            System.out.println("Relatório Criado");
          }catch (IOException e){
             System.err.println("Erro ao criar o PDF: " + e.getMessage());
          }

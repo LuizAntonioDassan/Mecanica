@@ -23,7 +23,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
+import Controller.ManutecanoController;
 import Model.Manutencao;
 import scripts.ButtonColumn;
 
@@ -62,7 +65,7 @@ public class ListaManutencaoPanel extends JPanel {
       };
     };
     
-    ButtonColumn button = new ButtonColumn(table, finalizarAction, 7);
+    ButtonColumn button = new ButtonColumn(table, finalizarManutencao, 7);
     button.setMnemonic(KeyEvent.VK_D);
     
     setLayout(new BorderLayout());
@@ -71,25 +74,21 @@ public class ListaManutencaoPanel extends JPanel {
 
   }
 
-  Action finalizarAction = new AbstractAction() {
+  Action finalizarManutencao = new AbstractAction() {
     public void actionPerformed(ActionEvent e){
       JTable table = (JTable)e.getSource();
       int row = Integer.valueOf( e.getActionCommand() );
-      Object manut = table.getModel().getValueAt(row, 0);
+      Object manut = table.getModel().getValueAt(row, 0);  
+      Object placa = table.getModel().getValueAt(row, 1);  
       Window window = SwingUtilities.windowForComponent(table);
-
-      // new ContaPanel(manut.toString());
-      new ComprovantePanel();
-
-      // int result = JOptionPane.showConfirmDialog(
-			// 		window,
-			// 		"Selecione o valor e a forma de pagamento" + manut,
-			// 		"Finalizar Manutenção",
-			// 		JOptionPane.YES_NO_OPTION);
-
+      // System.out.println(table);
+      TableModel model = table.getModel(); 
+      
+      new ContaPanel(manut.toString(), placa.toString());
+      new ManutecanoController().finalizarManutencao(Integer.parseInt(manut.toString()));
+      // new ComprovantePanel();
 
       System.out.println("Finalizando manutenção com ID: " + manut.toString());
     }
   };
-
 }

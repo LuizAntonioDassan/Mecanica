@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import Controller.Controllers;
+import Controller.ManutecanoController;
 import tables.ClienteDB;
 import tables.ContaDB;
 
@@ -28,7 +29,7 @@ public class ContaPanel extends JPanel{
     public JTextField forma;
     public JLabel texto;
 
-    public ContaPanel(String idmanut) {
+    public ContaPanel(String idmanut, String placa) {
         JFrame conta = new JFrame();
         conta.setVisible(true);
         conta.setSize(250, 400);
@@ -75,13 +76,14 @@ public class ContaPanel extends JPanel{
       public void actionPerformed(ActionEvent e) {
         if(!valor.getText().isEmpty() && !forma.getText().isEmpty()){
           criaConta(Integer.parseInt(idmanut), forma.getText(), Double.parseDouble(valor.getText()));
-          
           JOptionPane optionPane = new JOptionPane();
           optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
           optionPane.setMessage("Conta Cadastrada");       
           JDialog dialog = optionPane.createDialog(null, "Cadastro Realizado");
           dialog.setVisible(true);
-          new ComprovantePanel();
+          conta.dispose();
+          // new ManutecanoController().finalizarManutencao(Integer.parseInt(idmanut));
+          new ComprovantePanel(Integer.parseInt(idmanut), valor.getText(), placa);
         }else{
           JOptionPane optionPane = new JOptionPane();
           optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);

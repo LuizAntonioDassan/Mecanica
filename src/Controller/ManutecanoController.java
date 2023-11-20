@@ -54,4 +54,38 @@ public class ManutecanoController {
             }
         }
     }
+    public void finalizarManutencao(Integer idmanut){
+        try{
+            DataBase data = new DataBase();
+            conn = data.conectDb("mecanica", "postgres", "java");
+
+            String insertVeiculo = "UPDATE manutencao SET finalizado = true where idmanut = ?";
+            pstm = conn.prepareStatement(insertVeiculo);
+
+            pstm.setInt(1, idmanut);
+
+            int rows = pstm.executeUpdate();
+
+            System.out.println("Inserção realizada com sucesso. Linhas afetadas: " + rows);
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if(pstm != null){
+                    pstm.close();
+                }
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+
+            try{
+                if(conn != null){
+                    conn.close();
+                }
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
 }
