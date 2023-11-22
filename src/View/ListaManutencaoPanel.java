@@ -10,6 +10,7 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.lang.ModuleLayer.Controller;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -26,13 +27,16 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import Controller.Controllers;
 import Controller.ManutecanoController;
+import Model.Cliente;
 import Model.Manutencao;
 import scripts.ButtonColumn;
 
 public class ListaManutencaoPanel extends JPanel {
 
   private JButton finalizar;
+  private Controllers controllers;
 
   public ListaManutencaoPanel() {
     finalizar = new JButton("finalizar");
@@ -76,17 +80,19 @@ public class ListaManutencaoPanel extends JPanel {
 
   Action finalizarManutencao = new AbstractAction() {
     public void actionPerformed(ActionEvent e){
+      controllers = new Controllers();
       JTable table = (JTable)e.getSource();
       int row = Integer.valueOf( e.getActionCommand() );
       Object manut = table.getModel().getValueAt(row, 0);  
       Object placa = table.getModel().getValueAt(row, 1);  
+      Object valor = table.getModel().getValueAt(row, 3);  
       Window window = SwingUtilities.windowForComponent(table);
-      // System.out.println(table);
+      Cliente clienteManut = controllers.recuperaClienteVeiculo(placa.toString());
       TableModel model = table.getModel(); 
       
-      new ContaPanel(manut.toString(), placa.toString());
+      new ContaPanel(manut.toString(), placa.toString(), valor.toString(), clienteManut.getNome());
       new ManutecanoController().finalizarManutencao(Integer.parseInt(manut.toString()));
-      // new ComprovantePanel();
+
 
       System.out.println("Finalizando manutenção com ID: " + manut.toString());
     }

@@ -2,7 +2,7 @@ package View;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import javax.swing.*;
 
@@ -16,7 +16,7 @@ import Model.Veiculo;
 
 
 public class ManutencaoPanel extends JPanel {
-  private Timestamp dataHora;
+  private Timestamp dataHora = new Timestamp(System.currentTimeMillis());
 
   private JPanel pCPF;
   private static JTextField tCPF;
@@ -115,8 +115,10 @@ public class ManutencaoPanel extends JPanel {
     tData = new JTextArea();
     pData.setLayout(new BoxLayout(pData, BoxLayout.Y_AXIS));
     pData.add(new JLabel("Data: ", SwingConstants.LEFT));
-    // tData.setText(dataHora.toString());
+    tData.setText(dataHora.toString());
     pData.add(tData);
+
+    
 
     tCusto.addKeyListener(new KeyAdapter() {
       public void keyPressed(KeyEvent ke) {

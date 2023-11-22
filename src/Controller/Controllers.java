@@ -417,4 +417,53 @@ public class Controllers {
             }
         }
     }
+
+    public Cliente recuperaClienteVeiculo(String placa) {
+        ResultSet rows;
+        try {
+            DataBase data = new DataBase();
+            conn = data.conectDb("mecanica", "postgres", "java");
+
+            String table = String.format("select c.idcliente, c.nome, c.numero, c.cpf, c.endereco, c.email from veiculo v join cliente c on v.cpf = c.cpf where v.placa = '%s'", placa);
+            // String table = String.format("SELECT * FROM veiculo where placa LIKE
+            // '%%%s%%",placa); recupera todas as placas parecidas com esse nome
+            stm = conn.createStatement();
+
+            rows = stm.executeQuery(table);
+            if (rows.isBeforeFirst() == false) {
+                System.err.println("Nenhum Cliente encontrado com esse veiculo");
+            } else {
+                while (rows.next()) {
+                    System.out.println(rows.getString("idcliente") +
+                            " | " + rows.getString("nome") + " | "
+                            + rows.getString("numero") + " | "
+                            + rows.getString("cpf") + " | "
+                            + rows.getString("endereco") + " | "
+                            + rows.getString("email"));
+                    Cliente cliente = new Cliente(rows.getString("nome"), rows.getString("numero"),
+                            rows.getString("cpf"), rows.getString("endereco"), rows.getString("email"));
+                    return cliente;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stm != null) {
+                    stm.close(); // Fechar a declaração
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close(); // Fechar a conexão
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 }

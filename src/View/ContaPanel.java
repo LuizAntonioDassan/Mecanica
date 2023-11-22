@@ -20,6 +20,7 @@ import javax.swing.JTextPane;
 
 import Controller.Controllers;
 import Controller.ManutecanoController;
+import Model.Conta;
 import tables.ClienteDB;
 import tables.ContaDB;
 
@@ -28,8 +29,9 @@ public class ContaPanel extends JPanel{
     public JTextField valor;
     public JTextField forma;
     public JLabel texto;
+    private Conta contaNova;
 
-    public ContaPanel(String idmanut, String placa) {
+    public ContaPanel(String idmanut, String placa, String valorManut, String nome) {        
         JFrame conta = new JFrame();
         conta.setVisible(true);
         conta.setSize(250, 400);
@@ -39,6 +41,7 @@ public class ContaPanel extends JPanel{
         var panel = new JPanel();
 
         valor = new JTextField();
+        valor.setText(valorManut);
 
         forma = new JTextField();
         texto = new JLabel("Finalizar Manutenção");
@@ -74,8 +77,9 @@ public class ContaPanel extends JPanel{
 
          bCadastrar.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        contaNova = new Conta(Double.parseDouble(valorManut), forma.getText());
         if(!valor.getText().isEmpty() && !forma.getText().isEmpty()){
-          criaConta(Integer.parseInt(idmanut), forma.getText(), Double.parseDouble(valor.getText()));
+          criaConta(Integer.parseInt(idmanut), contaNova.getForma(), contaNova.getValor());
           JOptionPane optionPane = new JOptionPane();
           optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
           optionPane.setMessage("Conta Cadastrada");       
@@ -83,7 +87,7 @@ public class ContaPanel extends JPanel{
           dialog.setVisible(true);
           conta.dispose();
           // new ManutecanoController().finalizarManutencao(Integer.parseInt(idmanut));
-          new ComprovantePanel(Integer.parseInt(idmanut), valor.getText(), placa);
+          new ComprovantePanel(Integer.parseInt(idmanut), valor.getText(), placa, nome);
         }else{
           JOptionPane optionPane = new JOptionPane();
           optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);

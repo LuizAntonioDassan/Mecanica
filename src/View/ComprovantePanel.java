@@ -29,7 +29,7 @@ public class ComprovantePanel {
     Cliente cliente;
 
 
-    public ComprovantePanel(Integer idmanut, String valor, String placa) {
+    public ComprovantePanel(Integer idmanut, String valor, String placa, String nome) {
         JFrame comprovante = new JFrame();
         comprovante.setVisible(true);
         comprovante.setSize(250, 150);
@@ -66,7 +66,7 @@ public class ComprovantePanel {
 
         bCadastrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                geraRecibo(valor, placa);
+                geraRecibo(valor, placa, nome);
                 comprovante.dispose();
                 JOptionPane optionPane = new JOptionPane();
                 optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
@@ -82,12 +82,12 @@ public class ComprovantePanel {
 
     }
 
-    public void geraRecibo(String valor, String placa){
+    public void geraRecibo(String valor, String placa, String nome){
         PDDocument document = new PDDocument();
         PDPage firstPage = new PDPage();
         document.addPage(firstPage);
         String textoCompleto = "Comprovante de pagamento no valor de: R$"+ 
-        valor + " na placa: " + placa ;
+        valor + " no nome de " + nome + " e placa do carro " + placa ;
         
         try{
             PDPageContentStream contentStream = new PDPageContentStream(document, firstPage);
@@ -97,7 +97,7 @@ public class ComprovantePanel {
             contentStream.showText(textoCompleto);
             contentStream.endText();
             contentStream.close();
-            document.save("C:\\recibos\\mypdf.pdf");
+            document.save("C:\\recibos\\"+nome+".pdf");
             document.close();
             System.out.println("Relatório Criado");
          }catch (IOException e){
