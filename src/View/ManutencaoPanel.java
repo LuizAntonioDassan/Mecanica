@@ -123,7 +123,7 @@ public class ManutencaoPanel extends JPanel {
     tCusto.addKeyListener(new KeyAdapter() {
       public void keyPressed(KeyEvent ke) {
          String value = tCusto.getText();
-         int l = value.length();
+         
 
          var alreadyDecimal = value.contains(",");
 

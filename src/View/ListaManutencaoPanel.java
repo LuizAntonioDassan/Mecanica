@@ -5,27 +5,22 @@ import java.util.List;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.TextField;
-import java.awt.Window;
+
+
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.KeyEvent;
-import java.lang.ModuleLayer.Controller;
+
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.BoxLayout;
+
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
 
 import Controller.Controllers;
 import Controller.ManutecanoController;
@@ -86,9 +81,9 @@ public class ListaManutencaoPanel extends JPanel {
       Object manut = table.getModel().getValueAt(row, 0);  
       Object placa = table.getModel().getValueAt(row, 1);  
       Object valor = table.getModel().getValueAt(row, 3);  
-      Window window = SwingUtilities.windowForComponent(table);
+      
       Cliente clienteManut = controllers.recuperaClienteVeiculo(placa.toString());
-      TableModel model = table.getModel(); 
+
       
       new ContaPanel(manut.toString(), placa.toString(), valor.toString(), clienteManut.getNome());
       new ManutecanoController().finalizarManutencao(Integer.parseInt(manut.toString()));

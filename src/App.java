@@ -1,18 +1,6 @@
-import java.util.Scanner;
 
-import javax.management.Query;
 
 import Db.DataBase;
-import Model.Manutencao;
-import scripts.CriaTabelas;
-import scripts.InsereAdministrador;
-import scripts.InsereCliente;
-import scripts.InsereFuncionario;
-import scripts.InsereManutencao;
-import scripts.InsereVeiculo;
-import tables.ClienteDB;
-import tables.ManutencaoDB;
-import tables.VeiculoDB;
 import View.Screen;
 
 public class App {
